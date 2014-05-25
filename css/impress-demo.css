@@ -247,6 +247,31 @@ a:focus {
     white-space: nowrap;
 }
 
+.vertical {
+    font-family: "BiauKai";
+
+    -webkit-writing-mode: vertical-rl;
+    -ms-writing-mode: tb-rl;
+    writing-mode: vertical-rl;
+    unicode-bidi: bidi-override;
+}
+
+/*
+    Start page
+*/
+#start {
+    padding: 0;
+}
+#start h1 {
+    font-size: 80px;
+
+    -webkit-transform: translateZ(50px);
+    -moz-transform:    translateZ(50px);
+    -ms-transform:     translateZ(50px);
+    -o-transform:      translateZ(50px);
+    transform:         translateZ(50px);
+}
+
 /*
     And now we start to style each step separately.
 
@@ -260,6 +285,8 @@ a:focus {
 
 #title {
     padding: 0;
+    text-align: center;
+    line-height: 5;
 }
 
 #title .try {
@@ -276,7 +303,7 @@ a:focus {
 }
 
 #title h1 {
-    font-size: 190px;
+    font-size: 140px;
 
     -webkit-transform: translateZ(50px);
     -moz-transform:    translateZ(50px);
@@ -287,14 +314,6 @@ a:focus {
 
 #title .footnote {
     font-size: 32px;
-}
-
-.vertical {
-    font-family: "BiauKai";
-    -webkit-writing-mode: vertical-rl;
-    -ms-writing-mode: tb-rl;
-    writing-mode: vertical-rl;
-    unicode-bidi: bidi-override;
 }
 
 /*
