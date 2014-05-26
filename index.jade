@@ -11,9 +11,9 @@ block content
       <b>Safari</b> or <b>Firefox</b> browser.
   
   #impress
-    #start.step(data-x='1000' data-y='-400')
+    #start.step(data-x='2000' data-y='-400')
       h1 http://chenweiyj.github.io
-    .step(data-x='1000' data-y='400')
+    .step(data-x='2000' data-y='400')
       img(src='image/tsukuba.jpg' alt='筑波大學立柱照')
     //#bored.step.slide(data-x='-1000' data-y='-1500')
       q Aren't you just <b>bored</b> with all those slides-based presentations?
@@ -24,19 +24,47 @@ block content
       q Would you like to <strong>impress your audience</strong> with <strong>stunning 
         | visualization</strong> of your talk?
     #title.step(data-x='0' data-y='0' data-scale='5')
-      h1.vertical 日本紀行
-      //- h1.vertical 啊啊
-    .step.time(data-x='3000' data-y='1500')
-      img(src='image/IMG_0844.JPG' alt='新幹線票')
-    .step.time(data-x='3000' data-y='1400' data-z='-300')
-      img(src='image/IMG_0846.JPG' alt='新青森')
+      //- h1.vertical 日本紀行
+      h1.vertical 北海道紀行
+    .step.single-center(data-x='-2000' data-y='1500' data-scale='2')
+      h1.vertical 緣起
+    
+    .step(data-x='-3000' data-y='1500' data-z='-500' data-rotate='-70' data-rotate-y='90')
+      img(src='image/img_0844.jpg' alt='青春十八券')
+    .step(data-x='-2200' data-y='800' data-z='-800' data-rotate='15' data-rotate-x='-90')
+      img(src='image/img_0844.jpg' alt='青春十八雜誌')
+    .step(data-x='-1200' data-y='1500' data-z='-600' data-rotate='45' data-rotate-y='-90')
+      img(src='image/img_0844.jpg' alt='北海道全圖')
+    
+    .step.single-center(data-x='-2000' data-y='3000')
+      h1.vertical 準備
+    //- 手寫線路圖 環繞`準備`
+    .step(data-x='-2000' data-y='3000')
+      img(src='image/img_0844.jpg' alt='手寫線路圖0')
+    .step(data-x='-2000' data-y='3000')
+      img(src='image/img_0844.jpg' alt='手寫線路圖1')
+    .step(data-x='-2000' data-y='3000')
+      img(src='image/img_0844.jpg' alt='手寫線路圖2')
+    .step(data-x='-2000' data-y='3000')
+      img(src='image/img_0844.jpg' alt='手寫線路圖3')
+    .step(data-x='-2000' data-y='3000')
+      img(src='image/img_0844.jpg' alt='手寫線路圖4')
+    
+    //- 失算 新幹線票圖 ... 其餘景圖環繞
+    - var miss = 177 + 360
+    .step.single-center(data-x='0' data-y='4000' data-z='-1000' data-rotate=miss)
+      h1.vertical 失算
+    .step(data-x='0' data-y='3400' data-z='-1000')
+      img(src='image/img_0847.jpg' alt='新青森')
+    include photocircle
+
     #its.step(data-x='850' data-y='3000' data-rotate='90' data-scale='5')
       p.
         It's a <strong>presentation tool</strong> <br/>
         inspired by the idea behind <a href="http://prezi.com">prezi.com</a> <br/>
         and based on the <strong>power of CSS3 transforms and transitions</strong> 
         in modern browsers.
-    #overview.step(data-x='3000' data-y='1500' data-scale='10')
+    #overview.step(data-x='0' data-y='2000' data-scale='10')
 
   .hint
     p Use a spacebar or arrow keys to navigate
