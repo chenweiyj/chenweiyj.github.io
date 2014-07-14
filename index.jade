@@ -24,47 +24,40 @@ block content
       q Would you like to <strong>impress your audience</strong> with <strong>stunning 
         | visualization</strong> of your talk?
     #title.step(data-x='0' data-y='0' data-scale='5')
-      //- h1.vertical 日本紀行
-      h1.vertical 北海道紀行
-    .step.single-center(data-x='-2000' data-y='1500' data-scale='2')
+      //- h1.vertical 北海道紀行
+      h1.vertical aa
+    .step.single-center(data-x='-3000' data-y='1500' data-scale='2')
       h1.vertical 緣起
     
-    .step(data-x='-3000' data-y='1500' data-z='-500' data-rotate='-70' data-rotate-y='90')
+    .step(data-x='-4000' data-y='1500' data-z='-500' data-rotate='-70' data-rotate-y='90')
       img(src='image/img_0844.jpg' alt='青春十八券')
-    .step(data-x='-2200' data-y='800' data-z='-800' data-rotate='15' data-rotate-x='-90')
+    .step(data-x='-3200' data-y='800' data-z='-800' data-rotate='15' data-rotate-x='-90')
       img(src='image/img_0844.jpg' alt='青春十八雜誌')
-    .step(data-x='-1200' data-y='1500' data-z='-600' data-rotate='45' data-rotate-y='-90')
+    .step(data-x='-2200' data-y='1500' data-z='-600' data-rotate='45' data-rotate-y='-90')
       img(src='image/img_0844.jpg' alt='北海道全圖')
     
-    .step.single-center(data-x='-2000' data-y='3000')
+    #prep.step.single-center(data-x='-3500' data-y='3000')
       h1.vertical 準備
     //- 手寫線路圖 環繞`準備`
-    .step(data-x='-2000' data-y='3000')
+    .step(data-x='-3000' data-y='3000')
       img(src='image/img_0844.jpg' alt='手寫線路圖0')
-    .step(data-x='-2000' data-y='3000')
-      img(src='image/img_0844.jpg' alt='手寫線路圖1')
-    .step(data-x='-2000' data-y='3000')
-      img(src='image/img_0844.jpg' alt='手寫線路圖2')
-    .step(data-x='-2000' data-y='3000')
-      img(src='image/img_0844.jpg' alt='手寫線路圖3')
-    .step(data-x='-2000' data-y='3000')
-      img(src='image/img_0844.jpg' alt='手寫線路圖4')
+    //- .step(data-x='-2000' data-y='3000')
+    //-   img(src='image/img_0844.jpg' alt='手寫線路圖1')
+    //- .step(data-x='-2000' data-y='3000')
+    //-   img(src='image/img_0844.jpg' alt='手寫線路圖2')
+    //- .step(data-x='-2000' data-y='3000')
+    //-   img(src='image/img_0844.jpg' alt='手寫線路圖3')
+    //- .step(data-x='-2000' data-y='3000')
+    //-   img(src='image/img_0844.jpg' alt='手寫線路圖4')
     
     //- 失算 新幹線票圖 ... 其餘景圖環繞
-    - var miss = 177 + 360
-    .step.single-center(data-x='0' data-y='4000' data-z='-1000' data-rotate=miss)
+    #shisan.step.single-center(data-x='-4000', data-y='5500', data-z='-1000', data-rotate='177')
       h1.vertical 失算
-    .step(data-x='0' data-y='3400' data-z='-1000')
+    .step(data-x='-4000' data-y='4900' data-z='-1000')
       img(src='image/img_0847.jpg' alt='新青森')
     include photocircle
 
-    #its.step(data-x='850' data-y='3000' data-rotate='90' data-scale='5')
-      p.
-        It's a <strong>presentation tool</strong> <br/>
-        inspired by the idea behind <a href="http://prezi.com">prezi.com</a> <br/>
-        and based on the <strong>power of CSS3 transforms and transitions</strong> 
-        in modern browsers.
-    #overview.step(data-x='0' data-y='2000' data-scale='10')
+    #overview.step(data-x='1300' data-y='2000' data-scale='10')
 
   .hint
     p Use a spacebar or arrow keys to navigate
@@ -76,3 +69,39 @@ block content
 
   script(src='js/impress.js')
   script impress().init();
+
+  script(src='/socket.io/socket.io.js')
+  script.
+    (function() {
+      // My local socket.io connection.
+      // Note: Don't use locahost as it won't work on iOS, Android devices.
+      var socket = io.connect('http://10.242.113.239:8080'),
+        ua = navigator.userAgent.toLowerCase(),
+        slides = document.getElementsByClassName("step"),
+        i = slides.length;
+
+      socket.on('hashChange', function (data) {
+        // Update the hash on hashChange.
+        window.location.hash = data.hash;
+      });
+
+      // For the mobile devies, lets add a click eventhandler on each slide.
+      // On click lets send the new hash to be updated.
+      if (ua.search(/(iphone)|(ipod)|(ipad)|(android)/) != -1) {
+        while (i--) {
+          if (!slides[i].id) {
+            slides[i].id = "step-" + (i + 1);
+          }
+          slides[i].addEventListener("impress:stepenter", function (event) {
+            socket.emit('slideUpdate', "#/" + this.id);
+          });
+        }
+      }
+    })();
+
+  script.
+    var prep = document.getElementById("prep");
+    prep.addEventListener("impress:stepleave", function (event) {
+      event.stopPropagation();
+      impress().goto(document.getElementById("shisan"));
+    });
