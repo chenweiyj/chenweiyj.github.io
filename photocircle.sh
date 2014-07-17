@@ -1,6 +1,6 @@
 #!/bin/bash
 
-start=0900
+start=0848
 
 item=image/img_${start}.jpg
 array=($item)
