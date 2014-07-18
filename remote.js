@@ -13,11 +13,12 @@ app = require('http').createServer(function(request, response) {
   }).resume();
 }).listen(8000);
 
-io = require('socket.io').listen(8080);
+io = require('socket.io').listen(app);
 
-io.sockets.on('connection', function(socket) {
+io.on('connection', function(socket) {
+  console.log('connected: ' + socket);
   return socket.on('slideUpdate', function(data) {
-    return socket.broadcast.emit('hashChange', {
+    return io.emit('hashChange', {
       hash: data
     });
   });

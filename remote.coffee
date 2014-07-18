@@ -10,7 +10,8 @@ app = require 'http'
   .listen 8000
 
 io = require 'socket.io' 
-  .listen 8080
-io.sockets.on 'connection', (socket) ->
+  .listen app
+io.on 'connection', (socket) ->
+  console.log 'connected: ' + socket
   socket.on 'slideUpdate', (data) ->
-    socket.broadcast.emit 'hashChange', { hash: data }
+    io.emit 'hashChange', { hash: data }

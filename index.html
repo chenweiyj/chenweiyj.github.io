@@ -49,7 +49,7 @@
       <div id="prep" data-x="-3500" data-y="3000" class="step single-center">
         <h1 class="vertical">準備</h1>
       </div>
-      <div data-x="-3500" data-y="3000" data-z="-8000" class="step"><img src="image/img_0833.jpg" alt="手寫線路圖"></div>
+      <div data-x="-3500" data-y="3000" data-z="-10000" class="step"><img src="image/img_0833.jpg" alt="手寫線路圖"></div>
       <div id="shisan" data-x="-4000" data-y="5500" data-z="-1000" data-rotate="177" class="step single-center">
         <h1 class="vertical">失算</h1>
       </div>
@@ -177,7 +177,7 @@
       (function() {
         // My local socket.io connection.
         // Note: Don't use locahost as it won't work on iOS, Android devices.
-        var socket = io.connect('http://10.242.113.239:8080'),
+        var socket = io(),
           ua = navigator.userAgent.toLowerCase(),
           slides = document.getElementsByClassName("step"),
           i = slides.length;
@@ -189,7 +189,7 @@
         
         // For the mobile devies, lets add a click eventhandler on each slide.
         // On click lets send the new hash to be updated.
-        if (ua.search(/(iphone)|(ipod)|(ipad)|(android)/) != -1) {
+        if (ua.search(/(iphone)|(ipod)|(ipad)|(android)|(linux)/) != -1) {
           while (i--) {
             if (!slides[i].id) {
               slides[i].id = "step-" + (i + 1);

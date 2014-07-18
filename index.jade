@@ -39,7 +39,7 @@ block content
     #prep.step.single-center(data-x='-3500' data-y='3000')
       h1.vertical 準備
     //- 手寫線路圖 環繞`準備`
-    .step(data-x='-3500' data-y='3000' data-z='-8000')
+    .step(data-x='-3500' data-y='3000' data-z='-10000')
       img(src='image/img_0833.jpg' alt='手寫線路圖')
     //- .step(data-x='-2000' data-y='3000')
     //-   img(src='image/img_0844.jpg' alt='手寫線路圖1')
@@ -76,7 +76,7 @@ block content
     (function() {
       // My local socket.io connection.
       // Note: Don't use locahost as it won't work on iOS, Android devices.
-      var socket = io.connect('http://10.242.113.239:8080'),
+      var socket = io(),
         ua = navigator.userAgent.toLowerCase(),
         slides = document.getElementsByClassName("step"),
         i = slides.length;
@@ -88,7 +88,7 @@ block content
 
       // For the mobile devies, lets add a click eventhandler on each slide.
       // On click lets send the new hash to be updated.
-      if (ua.search(/(iphone)|(ipod)|(ipad)|(android)/) != -1) {
+      if (ua.search(/(iphone)|(ipod)|(ipad)|(android)|(linux)/) != -1) {
         while (i--) {
           if (!slides[i].id) {
             slides[i].id = "step-" + (i + 1);
